@@ -133,4 +133,39 @@ class Competition
         return $this;
     }
 
+    /**
+     * @return Player[]
+     */
+    public function getPlayers(): array
+    {
+        $players = [];
+        foreach ($this->getTeams() as $team) {
+            array_merge($players,$team->getPlayers()->toArray());
+        }
+        return $players;
+    }
+
+    /**
+     * null when there are no teams
+     *
+     * @return Team|null
+     */
+    public function getLongestTeamName(): Team|null
+    {
+        if($this->getTeams()->count()>0){
+
+            $teams = $this->getTeams();
+            $longest = $teams[0];
+
+            foreach ($teams as $team) {
+                if(strlen($longest->getName())<strlen($team->getName())){
+                    $longest = $team;
+                }
+            }
+            return $longest;
+        } else {
+            return null;
+        }
+    }
+
 }

@@ -27,8 +27,9 @@ class Team
     #[ORM\ManyToOne(targetEntity: Competition::class, inversedBy: 'teams')]
     private $competition;
 
-    #[ORM\OneToMany(mappedBy: 'team', targetEntity: Player::class)]
+    #[ORM\ManyToMany(targetEntity: Player::class, inversedBy: 'teams')]
     private $players;
+
 
     public function __construct()
     {
@@ -100,7 +101,6 @@ class Team
     {
         if (!$this->players->contains($player)) {
             $this->players[] = $player;
-            $player->setTeam($this);
         }
 
         return $this;
@@ -108,13 +108,9 @@ class Team
 
     public function removePlayer(Player $player): self
     {
-        if ($this->players->removeElement($player)) {
-            // set the owning side to null (unless already changed)
-            if ($player->getTeam() === $this) {
-                $player->setTeam(null);
-            }
-        }
+        $this->players->removeElement($player);
 
         return $this;
     }
+
 }
