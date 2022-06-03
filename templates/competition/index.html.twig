@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CompetitionController!{% endblock %}
+{% block title %}Competitions{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,50 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/ubuntu/dev/Exam/src/Controller/CompetitionController.php'|file_link(0) }}">src/Controller/CompetitionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/ubuntu/dev/Exam/templates/competition/index.html.twig'|file_link(0) }}">templates/competition/index.html.twig</a></code></li>
-    </ul>
+<div class="text-center">
+    <br>
+    <h1>List of Competitons: </h1>
+</div>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <table class="mx-auto table table-striped">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Sport</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    {% if competitions is defined %}
+                        {% for competition in competitions %}
+                        <pre>
+                        </pre>
+                        <tr>
+                            {# <td><a target="_blank" href="{{ item.originalUrl }}">{{ item.originalUrl }}</a></td> #}
+                            <td>{{ competition.id }}</td>
+                            <td>{{ competition.name }}</td>
+                            <td>{{ competition.sport }}</td>
+                            <td>{{ competition.city }}</td>
+                            <td><a href="{{ path("competition_edit",{"id":competition.id}) }}">Edit</a><br><a href="{{ path("competition_delete",{"id":competition.id}) }}">Delete</a></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">Nothing to see</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Nothing to see</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <a class="btn-primary btn" href="{{ path("competition_create") }}">Create a new Competition</a>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
 </div>
 {% endblock %}

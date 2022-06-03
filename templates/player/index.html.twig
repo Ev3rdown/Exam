@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Teams{% endblock %}
+{% block title %}Players{% endblock %}
 
 {% block body %}
 <style>
@@ -10,7 +10,7 @@
 
 <div class="text-center">
     <br>
-    <h1>List of Teams: </h1>
+    <h1>List of Players: </h1>
 </div>
 <div class="container">
     <div class="row justify-content-md-center">
@@ -19,23 +19,23 @@
             <table class="mx-auto table table-striped">
                 <thead>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>City</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Role</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
-                    {% if teams is defined %}
-                        {% for team in teams %}
+                    {% if players is defined %}
+                        {% for player in players %}
                         <pre>
                         </pre>
                         <tr>
                             {# <td><a target="_blank" href="{{ item.originalUrl }}">{{ item.originalUrl }}</a></td> #}
-                            <td>{{ team.id }}</td>
-                            <td>{{ team.name }}</td>
-                            <td>{{ team.color }}</td>
-                            <td>{{ team.city }}</td>
-                            <td><a href="{{ path("team_edit",{"id":team.id}) }}">Edit</a><br><a href="{{ path("team_delete",{"id":team.id}) }}">Delete</a></td>
+                            <td>{{ player.id }}</td>
+                            <td>{{ player.firstname }}</td>
+                            <td>{{ player.lastname }}</td>
+                            <td>{{ player.role }}</td>
+                            <td><a href="{{ path("player_edit",{"id":player.id}) }}">Edit</a><br><a href="{{ path("player_delete",{"id":player.id}) }}">Delete</a></td>
                         </tr>
                         {% else %}
                         <tr>
@@ -49,7 +49,7 @@
                     {% endif %}
                 </tbody>
             </table>
-            <a class="btn-primary btn" href="{{ path("team_create") }}">Create a new Team</a>
+            <a class="btn-primary btn" href="{{ path("player_create") }}">Create a new Player</a>
         </div>
         <div class="col-lg-2"></div>
     </div>

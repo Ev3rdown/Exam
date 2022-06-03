@@ -30,7 +30,7 @@ class Competition
     #[ORM\Column(type: 'date')]
     private $stopDate;
 
-    #[ORM\OneToMany(mappedBy: 'competition', targetEntity: Team::class)]
+    #[ORM\OneToMany(mappedBy: 'competition', targetEntity: Team::class, cascade:['persist'])]
     private $teams;
 
     public function __construct()

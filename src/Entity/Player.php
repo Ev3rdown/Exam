@@ -24,10 +24,7 @@ class Player
     #[ORM\Column(type: 'string', length: 255)]
     private $role;
 
-    #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'players')]
-    private $team;
-
-    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: 'players')]
+    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: 'players',cascade:['persist',"refresh"])]
     private $teams;
 
     public function __construct()
@@ -72,18 +69,6 @@ class Player
     public function setRole(string $role): self
     {
         $this->role = $role;
-
-        return $this;
-    }
-
-    public function getTeam(): ?Team
-    {
-        return $this->team;
-    }
-
-    public function setTeam(?Team $team): self
-    {
-        $this->team = $team;
 
         return $this;
     }
